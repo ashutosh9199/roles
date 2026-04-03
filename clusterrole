@@ -3,6 +3,6 @@ kind: ClusterRole
 metadata:
   name: pod-reader
 rules:
-- apiGroups: [""]
-  resources: ["pods"]
-  verbs: ["get", "list", "watch"]
+- apiGroups: ["","apps"]
+  resources: ["nodes", "namespaces", "pods", "services", "deployments", "replicasets", "configmaps", "secrets", "statefulsets", "daemonsets", "jobs", "cronjobs"]
+  verbs: ["get", "list", "watch", "create", "delete", "update", "patch"]
