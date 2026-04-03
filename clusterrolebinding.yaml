@@ -9,7 +9,6 @@ subjects:
 - kind: serviceAccount
   name: noti-serviceaccount
   namespcae: team4-ns
-  apiGroup: rbac.authorization.k8s.io/v1
 roleRef:
   kind: ClusterRole
   name: pod-reader
