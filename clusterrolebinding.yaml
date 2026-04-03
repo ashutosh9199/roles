@@ -6,7 +6,7 @@ subjects:
 - kind: User
   name: ashutosh
   apiGroup: rbac.authorization.k8s.io
-- kind: serviceAccount
+- kind: ServiceAccount
   name: noti-serviceaccount
   namespace: team4-ns
 roleRef:
