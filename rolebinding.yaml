@@ -2,10 +2,14 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: read-pods-binding
-  namespace: gateway-ns
+  namespace: team4-ns
 subjects:
 - kind: User
   name: ashutosh
+  apiGroup: rbac.authorization.k8s.io
+- kind: serviceAccount
+  name: noti-serviceaccount
+  namespcae: team4-ns
   apiGroup: rbac.authorization.k8s.io
 roleRef:
   kind: Role
