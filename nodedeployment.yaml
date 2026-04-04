@@ -17,8 +17,11 @@ spec:
         training: devops
 
       affinity:
+        # -------------------------
+        # NODE AFFINITY
+        # -------------------------
         nodeAffinity:
-          #HARD rule (must be satisfied)
+          # HARD rule (must match)
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
@@ -27,7 +30,7 @@ spec:
                 values:
                 - devops
 
-          #SOFT rule (best-effort preference)
+          # SOFT rule (preference)
           preferredDuringSchedulingIgnoredDuringExecution:
           - weight: 50
             preference:
@@ -36,6 +39,30 @@ spec:
                 operator: In
                 values:
                 - backend
+
+        # -------------------------
+        # POD AFFINITY
+        # -------------------------
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 30
+            podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  app: frontend
+              topologyKey: kubernetes.io/hostname
+
+        # -------------------------
+        # POD ANTI-AFFINITY
+        # -------------------------
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  app: duniversity-backend
+              topologyKey: kubernetes.io/hostname
 
       containers:
       - name: duniversity-backend
