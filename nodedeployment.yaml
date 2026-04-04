@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: duniversity-backend
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: duniversity-backend
+  template:
+    metadata:
+      labels:
+        app: duniversity-backend
+    spec:
+      nodeSelector:
+        training: devops
+      containers:
+      - name: duniversity-backend
+        image: ashutosh4782/duniversity-college-portal-backend:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
