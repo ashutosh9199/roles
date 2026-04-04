@@ -15,6 +15,28 @@ spec:
     spec:
       nodeSelector:
         training: devops
+
+      affinity:
+        nodeAffinity:
+          #HARD rule (must be satisfied)
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: training
+                operator: In
+                values:
+                - devops
+
+          #SOFT rule (best-effort preference)
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 50
+            preference:
+              matchExpressions:
+              - key: node-type
+                operator: In
+                values:
+                - backend
+
       containers:
       - name: duniversity-backend
         image: ashutosh4782/duniversity-college-portal-backend:latest
