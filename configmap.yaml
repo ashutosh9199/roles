@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: duniversity-backend-config
+  namespace: default
+data:
+  config.yaml: |
+    server:
+      port: 8080
+
+    app:
+      name: duniversity-college-portal-backend
+      environment: dev
+
+    database:
+      host: mysql-service
+      port: 3306
+      name: duniversity_db
+      username: duniversity_user
+
+    logging:
+      level: INFO
+
+    features:
+      registrationEnabled: true
+      notificationsEnabled: true
