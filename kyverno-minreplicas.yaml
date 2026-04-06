@@ -1,0 +1,24 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: enforce-min-replicas
+spec:
+  validationFailureAction: Enforce
+  rules:
+  - name: check-min-replicas
+    match:
+      resources:
+        kinds:
+        - Deployment
+    exclude:
+      resources:
+        namespaces:
+        - kube-system
+        - kyverno
+        - gatekeeper-system
+        - kube-public
+    validate:
+      message: "Deployment must have at least 2 replicas"
+      pattern:
+        spec:
+          replicas: ">=2"
