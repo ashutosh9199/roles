@@ -1,0 +1,19 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sRollingUpdate
+metadata:
+  name: enforce-rolling-update
+spec:
+  match:
+    kinds:
+      - apiGroups: ["apps"]
+        kinds: ["Deployment"]
+---
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sMinReplicas
+metadata:
+  name: enforce-min-replicas
+spec:
+  match:
+    kinds:
+      - apiGroups: ["apps"]
+        kinds: ["Deployment"]
