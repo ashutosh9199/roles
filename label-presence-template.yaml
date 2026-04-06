@@ -14,3 +14,13 @@ spec:
               type: array
               items:
                 type: string
+  targets:
+  - target: admission.k8s.gatekeeper.sh
+    rego: |
+      package k8srequiredlabels
+ 
+      violation[{"msg": msg}] {
+        required := input.parameters.labels[_]
+        not input.review.object.metadata.labels[required]
+        msg := sprintf("Missing required label: %v", [required])
+      }
